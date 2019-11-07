@@ -2,6 +2,18 @@ import React from 'react';
 import logo from 'src/logo.svg';
 import 'src/App.css';
 
+interface Movie {
+  title: string
+}
+
+const movies: Movie[]  = [
+  {title: 'Mean Girls'},
+  {title: 'Hackers'},
+  {title: 'The Grey'},
+  {title: 'Sunshine'},
+  {title: 'Ex Machina'},
+];
+
 const App: React.FC = () => {
   return (
     <div className="App">
@@ -19,6 +31,13 @@ const App: React.FC = () => {
           Learn React
         </a>
       </header>
+      <div>
+        <ul>
+          {movies.map(({ title }: Movie) => {
+            <li>{title}</li>
+          })}
+        </ul>
+      </div>
     </div>
   );
 }
