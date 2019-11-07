@@ -3,17 +3,21 @@ import Search from 'src/components/Search/Search';
 import AddMovie from './components/AddMovie/AddMovie';
 import Movie from './components/Movie/Movie';
 
-interface Movie {
+export interface IMovie {
   title: string;
   watched: boolean;
+  year: number;
+  runTime: number;
+  metascore: number;
+  imdbRating: number;
 }
 
-const movieList: Movie[] = [
-  { title: 'Mean Girls', watched: false },
-  { title: 'Hackers', watched: false },
-  { title: 'The Grey', watched: false },
-  { title: 'Sunshine', watched: false },
-  { title: 'Ex Machina', watched: false },
+const movieList: IMovie[] = [
+  { title: 'Mean Girls', watched: false, year: 1995, runTime: 107, metascore: 46, imdbRating: 6.2 },
+  { title: 'Hackers', watched: false, year: 1990, runTime: 62, metascore: 33, imdbRating: 7.8 },
+  { title: 'The Grey', watched: false, year: 1897, runTime: 23, metascore: 45, imdbRating: 2.5 },
+  { title: 'Sunshine', watched: false, year: 1122, runTime: 334, metascore: 64, imdbRating: 5.4 },
+  { title: 'Ex Machina', watched: false, year: 2030, runTime: 123, metascore: 125, imdbRating: 5.8 },
 ];
 
 const App: React.FC = () => {
@@ -32,7 +36,18 @@ const App: React.FC = () => {
       <header>Movie List</header>
       <div>
         <AddMovie
-          handleAddMovie={(movieToAdd: string) => setMovies(movies.concat({ title: movieToAdd, watched: false }))}
+          handleAddMovie={(movieToAdd: string) =>
+            setMovies(
+              movies.concat({
+                title: movieToAdd,
+                watched: false,
+                year: Math.random() * 1000,
+                runTime: Math.random() * 100,
+                metascore: Math.random() * 10,
+                imdbRating: Math.random() * 1,
+              })
+            )
+          }
         />
       </div>
       <div>
@@ -51,12 +66,11 @@ const App: React.FC = () => {
           {movies
             .filter(movie => movie.title.toLowerCase().includes(searchQuery.toLowerCase()))
             .filter(movie => movie.watched === watchedFilter)
-            .map(({ title, watched }: Movie, index: number) => (
+            .map((movie: IMovie, index: number) => (
               <Movie
                 key={index}
                 index={index}
-                watched={watched}
-                title={title}
+                movie={movie}
                 handleClick={(index: number) => handleUpdateMovie(index)}
               />
             ))}
