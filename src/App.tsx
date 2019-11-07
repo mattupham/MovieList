@@ -19,6 +19,7 @@ const movieList: Movie[] = [
 const App: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState(movieList);
+  const [watchedFilter, setWatchedFilter] = useState(false);
 
   const handleUpdateMovie = (index: number) => {
     const newMovies = [...movies];
@@ -38,9 +39,18 @@ const App: React.FC = () => {
         <Search handleQuerySubmit={(query: string) => setSearchQuery(query)} />
       </div>
       <div>
+        <button onClick={() => setWatchedFilter(true)} style={{ background: watchedFilter ? 'green' : 'none' }}>
+          Watched
+        </button>
+        <button onClick={() => setWatchedFilter(false)} style={{ background: watchedFilter ? 'none' : 'red' }}>
+          To Watch
+        </button>
+      </div>
+      <div>
         <ul>
           {movies
             .filter(movie => movie.title.toLowerCase().includes(searchQuery.toLowerCase()))
+            .filter(movie => movie.watched === watchedFilter)
             .map(({ title, watched }: Movie, index: number) => (
               <Movie
                 key={index}
