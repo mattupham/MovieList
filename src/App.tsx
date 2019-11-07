@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import styles from 'src/App.module.scss';
 import Search from 'src/components/Search/Search';
 import AddMovie from './components/AddMovie/AddMovie';
+import Movie from './components/Movie/Movie';
 
 interface Movie {
   title: string;
@@ -20,6 +20,12 @@ const App: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState(movieList);
 
+  const handleUpdateMovie = (index: number) => {
+    const newMovies = [...movies];
+    newMovies[index].watched = !newMovies[index].watched;
+    setMovies(newMovies);
+  };
+
   return (
     <div className="App">
       <header>Movie List</header>
@@ -36,19 +42,13 @@ const App: React.FC = () => {
           {movies
             .filter(movie => movie.title.toLowerCase().includes(searchQuery.toLowerCase()))
             .map(({ title, watched }: Movie, index: number) => (
-              <li className={styles.movieItem} key={index}>
-                <div>{title}</div>
-                <button
-                  onClick={() => {
-                    const newMovies = [...movies];
-                    newMovies[index].watched = !newMovies[index].watched;
-                    setMovies(newMovies);
-                  }}
-                  style={{ backgroundColor: watched ? 'green' : 'red' }}
-                >
-                  {watched ? 'Watched' : 'To Watch'}
-                </button>
-              </li>
+              <Movie
+                key={index}
+                index={index}
+                watched={watched}
+                title={title}
+                handleClick={(index: number) => handleUpdateMovie(index)}
+              />
             ))}
         </ul>
       </div>
