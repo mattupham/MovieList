@@ -1,5 +1,5 @@
 import React from 'react';
-import 'src/App.css';
+import styles from 'src/App.module.scss';
 
 interface Movie {
   title: string;
@@ -16,12 +16,14 @@ const movies: Movie[] = [
 const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">Movie List</header>
+      <header>Movie List</header>
       <div>
         <ul>
-          {movies.map(({ title }: Movie) => {
-            <li>{title}</li>;
-          })}
+          {movies.map(({ title }: Movie, index: number) => (
+            <li className={styles.movieItem} key={index}>
+              {title}
+            </li>
+          ))}
         </ul>
       </div>
     </div>
