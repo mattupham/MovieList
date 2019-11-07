@@ -10,6 +10,7 @@ const Search = ({ handleQuerySubmit }: IProps) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handleQuerySubmit(query);
+    setQuery('');
   };
 
   return (
@@ -18,7 +19,7 @@ const Search = ({ handleQuerySubmit }: IProps) => {
         Name:
         <input type="text" value={query} onChange={e => setQuery(e.target.value)} />
       </label>
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Go" />
     </form>
   );
 };
