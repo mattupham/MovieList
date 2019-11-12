@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useReducer, useContext } from "react";
 
 export interface IMovie {
   title: string;
@@ -52,7 +52,7 @@ export function movieReducer(state: State, action: Action) {
 }
 
 function MovieProvider({ children }: MovieProviderProps) {
-  const [state, dispatch] = React.useReducer(movieReducer, [
+  const [state, dispatch] = useReducer(movieReducer, [
     {
       title: "Batman",
       watched: false,
@@ -104,7 +104,7 @@ function MovieProvider({ children }: MovieProviderProps) {
 }
 
 function useMovieState() {
-  const context = React.useContext(MovieStateContext);
+  const context = useContext(MovieStateContext);
   if (context === undefined) {
     throw new Error("useMovieState must be used within a MovieProvider");
   }
@@ -112,7 +112,7 @@ function useMovieState() {
 }
 
 function useMovieDispatch() {
-  const context = React.useContext(MovieDispatchContext);
+  const context = useContext(MovieDispatchContext);
   if (context === undefined) {
     throw new Error("useMovieDispatch must be used within a MovieProvider");
   }

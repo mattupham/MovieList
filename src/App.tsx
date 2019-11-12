@@ -16,11 +16,6 @@ const App: React.FC = () => {
           <AddMovie />
         </div>
         <div>
-          <Search
-            handleQuerySubmit={(query: string) => setSearchQuery(query)}
-          />
-        </div>
-        <div>
           <button
             onClick={() => setWatchedFilter(true)}
             style={{ background: watchedFilter ? "green" : "none" }}
@@ -33,6 +28,9 @@ const App: React.FC = () => {
           >
             To Watch
           </button>
+          <Search
+            handleQuerySubmit={(query: string) => setSearchQuery(query)}
+          />
         </div>
         <div>
           <MovieList />
