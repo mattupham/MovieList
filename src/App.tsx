@@ -3,13 +3,8 @@ import Search from "src/components/Search/Search";
 import AddMovie from "src/components/AddMovie/AddMovie";
 import MovieList from "src/components/MovieList/MovieList";
 import ToggleWatch from "src/components/ToggleWatch/ToggleWatch";
-import { IMovie, MovieProvider } from "src/movie-context";
-import {
-  FilterProvider,
-  useFilterDispatch,
-  WatchFilter,
-  useFilterState
-} from "src/filter-context";
+import { MovieProvider } from "src/movie-context";
+import { FilterProvider } from "src/filter-context";
 
 const App: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");

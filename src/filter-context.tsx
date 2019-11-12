@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useReducer, useContext } from "react";
+import React, { useReducer, useContext } from "react";
 
 export enum WatchFilter {
-  Watch,
+  Watched,
   ToWatch,
   All
 }

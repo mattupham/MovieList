@@ -1,5 +1,6 @@
-import React, { FormEvent, useState, useReducer } from "react";
-import { movieReducer, IMovie, useMovieDispatch } from "src/movie-context";
+import React, { FormEvent, useState } from "react";
+import { IMovie, useMovieDispatch } from "src/movie-context";
+import { WatchFilter } from "src/filter-context";
 
 const createNumber = (base: number) => {
   return Math.floor(Math.random() * base);
@@ -8,7 +9,7 @@ const createNumber = (base: number) => {
 const createNewMovie = (movieTitle: string): IMovie => {
   return {
     title: movieTitle,
-    watched: false,
+    watched: WatchFilter.ToWatch,
     year: createNumber(1000),
     runTime: createNumber(100),
     metascore: createNumber(10),

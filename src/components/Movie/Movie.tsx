@@ -1,5 +1,6 @@
 import React, { MouseEvent, useState } from "react";
 import { IMovie, useMovieDispatch } from "src/movie-context";
+import { WatchFilter } from "src/filter-context";
 import styles from "src/components/Movie/Movie.module.scss";
 
 interface IProps {
@@ -20,9 +21,12 @@ const Movie = ({ movie, index }: IProps) => {
         <div>
           <button
             onClick={() => dispatch({ type: "TOGGLE_WATCHED", payload: index })}
-            style={{ backgroundColor: movie.watched ? "green" : "red" }}
+            style={{
+              backgroundColor:
+                movie.watched === WatchFilter.Watched ? "green" : "red"
+            }}
           >
-            {movie.watched ? "Watched" : "To Watch"}
+            {movie.watched === WatchFilter.Watched ? "Watched" : "To Watch"}
           </button>
           <button
             onClick={() => dispatch({ type: "DELETE_MOVIE", payload: index })}

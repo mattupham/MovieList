@@ -16,13 +16,13 @@ export default function ToggleWatch() {
           dispatch({
             type: "SET_WATCH_FILTER",
             payload:
-              watchFilter !== WatchFilter.Watch
-                ? WatchFilter.Watch
+              watchFilter !== WatchFilter.Watched
+                ? WatchFilter.Watched
                 : WatchFilter.All
           })
         }
         style={{
-          background: watchFilter === WatchFilter.Watch ? "green" : "none"
+          background: watchFilter === WatchFilter.Watched ? "green" : "none"
         }}
       >
         Watched

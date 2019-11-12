@@ -1,8 +1,9 @@
-import React, { FunctionComponent, useReducer, useContext } from "react";
+import React, { useReducer, useContext } from "react";
+import { WatchFilter } from "./filter-context";
 
 export interface IMovie {
   title: string;
-  watched: boolean;
+  watched: WatchFilter;
   year: number;
   runTime: number;
   metascore: number;
@@ -24,7 +25,10 @@ const MovieDispatchContext = React.createContext<Dispatch | undefined>(
 
 const toggleWatched = (movies: State, index: number) => {
   const newMovies = [...movies];
-  newMovies[index].watched = !newMovies[index].watched;
+  newMovies[index].watched =
+    newMovies[index].watched === WatchFilter.Watched
+      ? WatchFilter.ToWatch
+      : WatchFilter.Watched;
   return newMovies;
 };
 
@@ -55,7 +59,7 @@ function MovieProvider({ children }: MovieProviderProps) {
   const [state, dispatch] = useReducer(movieReducer, [
     {
       title: "Batman",
-      watched: false,
+      watched: WatchFilter.ToWatch,
       year: 1995,
       runTime: 107,
       metascore: 46,
@@ -63,7 +67,7 @@ function MovieProvider({ children }: MovieProviderProps) {
     },
     {
       title: "Hackers",
-      watched: false,
+      watched: WatchFilter.ToWatch,
       year: 1990,
       runTime: 62,
       metascore: 33,
@@ -71,7 +75,7 @@ function MovieProvider({ children }: MovieProviderProps) {
     },
     {
       title: "The Grey",
-      watched: false,
+      watched: WatchFilter.ToWatch,
       year: 1897,
       runTime: 23,
       metascore: 45,
@@ -79,7 +83,7 @@ function MovieProvider({ children }: MovieProviderProps) {
     },
     {
       title: "Sunshine",
-      watched: false,
+      watched: WatchFilter.ToWatch,
       year: 1122,
       runTime: 334,
       metascore: 64,
@@ -87,7 +91,7 @@ function MovieProvider({ children }: MovieProviderProps) {
     },
     {
       title: "Ex Machina",
-      watched: false,
+      watched: WatchFilter.ToWatch,
       year: 2030,
       runTime: 123,
       metascore: 125,
