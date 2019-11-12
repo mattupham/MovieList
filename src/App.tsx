@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Search from "src/components/Search/Search";
 import AddMovie from "src/components/AddMovie/AddMovie";
 import MovieList from "src/components/MovieList/MovieList";
@@ -15,7 +15,7 @@ const App: React.FC = () => {
           <div>
             <AddMovie />
           </div>
-          <div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
             <ToggleWatch />
             <Search />
           </div>

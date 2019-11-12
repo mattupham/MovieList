@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState } from "react";
+import React, { useState } from "react";
 import { IMovie, useMovieDispatch } from "src/movie-context";
 import { WatchFilter } from "src/filter-context";
 import styles from "src/components/Movie/Movie.module.scss";
