@@ -6,6 +6,7 @@ const app = express();
 const PORT = 8080;
 const cors = require("cors");
 
+app.use(express.json());
 app.use(cors());
 
 app.listen(PORT, function() {
@@ -14,6 +15,14 @@ app.listen(PORT, function() {
 
 app.get("/movies", function(req, res) {
   res.send(movies);
+});
+
+app.post("/movie", function(req, res) {
+  const movie = req.body.movie;
+  console.log("MOVIE: ", movie);
+  console.log("MOVIES: ", movies);
+  movies.push(movie);
+  res.send("ok");
 });
 
 enum WatchFilter {

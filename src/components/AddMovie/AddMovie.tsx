@@ -1,6 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import { IMovie, useMovieDispatch } from "src/contexts/movie-context";
 import { WatchFilter } from "src/contexts/filter-context";
+import axios from "axios";
 
 const createNumber = (base: number) => {
   return Math.floor(Math.random() * base);
@@ -21,9 +22,13 @@ const AddMovie: React.FC = () => {
   const [movieToAdd, setMovieToAdd] = useState("");
   const dispatch = useMovieDispatch();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch({ type: "ADD_MOVIE", payload: createNewMovie(movieToAdd) });
+    const newMovie = createNewMovie(movieToAdd);
+    // dispatch({ type: "ADD_MOVIE", payload: newMovie });
+    await axios.post("http://localhost:8080/movie", { movie: newMovie });
+    const { data: newMovies } = await axios.get("http://localhost:8080/movies");
+    dispatch({ type: "ADD_INITIAL_MOVIES", payload: newMovies });
     setMovieToAdd("");
   };
 

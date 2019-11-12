@@ -65,6 +65,7 @@ function MovieProvider({ children }: MovieProviderProps) {
   useEffect(() => {
     async function loadMovies() {
       const { data: movies } = await axios.get("http://localhost:8080/movies");
+      console.log("MOVIES: ", movies);
       dispatch({ type: "ADD_INITIAL_MOVIES", payload: movies });
     }
     loadMovies();
