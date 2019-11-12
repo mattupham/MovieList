@@ -7,6 +7,7 @@
     "@types/node": "12.12.6",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.4",
+    "express": "^4.17.1",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
@@ -34,12 +35,14 @@
       "last 1 safari version"
     ]
   },
+  "proxy": "http://localhost:8080",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "devDependencies": {
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^6.5.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "nodemon": "^1.19.4"
   },
   "author": "mcupham@gmail.com",
   "license": "ISC"
