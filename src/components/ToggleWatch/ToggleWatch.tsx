@@ -43,6 +43,19 @@ export default function ToggleWatch() {
       >
         To Watch
       </button>
+      <button
+        onClick={() =>
+          dispatch({
+            type: "SET_WATCH_FILTER",
+            payload: WatchFilter.All
+          })
+        }
+        style={{
+          background: watchFilter === WatchFilter.All ? "cyan" : "none"
+        }}
+      >
+        All
+      </button>
     </div>
   );
 }

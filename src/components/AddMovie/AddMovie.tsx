@@ -37,7 +37,7 @@ const AddMovie: React.FC = () => {
           onChange={e => setMovieToAdd(e.target.value)}
         />
       </label>
-      <input type="submit" value="Go" />
+      <input type="submit" value="Add" />
     </form>
   );
 };
