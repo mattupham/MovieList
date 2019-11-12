@@ -19,8 +19,6 @@ app.get("/movies", function(req, res) {
 
 app.post("/movie", function(req, res) {
   const movie = req.body.movie;
-  console.log("MOVIE: ", movie);
-  console.log("MOVIES: ", movies);
   movies.push(movie);
   res.send("ok");
 });
