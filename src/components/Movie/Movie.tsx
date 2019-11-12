@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { IMovie, useMovieDispatch } from "src/movie-context";
-import { WatchFilter } from "src/filter-context";
+import { IMovie, useMovieDispatch } from "src/contexts/movie-context";
+import { WatchFilter } from "src/contexts/filter-context";
 import styles from "src/components/Movie/Movie.module.scss";
 
 interface IProps {

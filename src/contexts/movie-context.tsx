@@ -1,5 +1,5 @@
 import React, { useReducer, useContext } from "react";
-import { WatchFilter } from "./filter-context";
+import { WatchFilter } from "src/contexts/filter-context";
 
 export interface IMovie {
   title: string;

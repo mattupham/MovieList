@@ -3,7 +3,7 @@ import {
   useFilterDispatch,
   WatchFilter,
   useFilterState
-} from "src/filter-context";
+} from "src/contexts/filter-context";
 
 export default function ToggleWatch() {
   const dispatch = useFilterDispatch();

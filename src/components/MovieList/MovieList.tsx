@@ -1,9 +1,9 @@
 import React from "react";
-import { useMovieState, IMovie } from "src/movie-context";
+import { useMovieState, IMovie } from "src/contexts/movie-context";
 import {
   useFilterState,
   WatchFilter as WatchFilters
-} from "src/filter-context";
+} from "src/contexts/filter-context";
 import Movie from "src/components/Movie/Movie";
 
 const watchFilterFunc = (movie: IMovie, curWatchFilter: WatchFilters) => {

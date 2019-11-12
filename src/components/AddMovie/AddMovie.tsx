@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from "react";
-import { IMovie, useMovieDispatch } from "src/movie-context";
-import { WatchFilter } from "src/filter-context";
+import { IMovie, useMovieDispatch } from "src/contexts/movie-context";
+import { WatchFilter } from "src/contexts/filter-context";
 
 const createNumber = (base: number) => {
   return Math.floor(Math.random() * base);

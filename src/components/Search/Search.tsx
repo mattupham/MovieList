@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { useFilterDispatch } from "src/filter-context";
+import { useFilterDispatch } from "src/contexts/filter-context";
 
 const Search = () => {
   const [query, setQuery] = useState("");
