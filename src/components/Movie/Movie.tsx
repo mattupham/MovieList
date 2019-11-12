@@ -1,30 +1,35 @@
 import React, { MouseEvent, useState } from "react";
-import { IMovie } from "src/movie-context";
+import { IMovie, useMovieDispatch } from "src/movie-context";
 import styles from "src/components/Movie/Movie.module.scss";
 
 interface IProps {
   movie: IMovie;
   index: number;
-  handleClick: (index: number) => void;
 }
 
-const Movie = ({ movie, index, handleClick }: IProps) => {
+const Movie = ({ movie, index }: IProps) => {
   const [showDetails, setShowDetails] = useState(false);
+  const dispatch = useMovieDispatch();
 
   return (
-    <li
-      onClick={e => setShowDetails(!showDetails)}
-      className={styles.movieItem}
-      key={index}
-    >
+    <li className={styles.movieItem} key={index}>
       <div className={styles.titleContainer}>
-        <div>{movie.title}</div>
-        <button
-          onClick={(e: MouseEvent) => handleClick(index)}
-          style={{ backgroundColor: movie.watched ? "green" : "red" }}
-        >
-          {movie.watched ? "Watched" : "To Watch"}
-        </button>
+        <div onClick={e => setShowDetails(!showDetails)}>
+          <div>{movie.title}</div>
+        </div>
+        <div>
+          <button
+            onClick={() => dispatch({ type: "TOGGLE_WATCHED", payload: index })}
+            style={{ backgroundColor: movie.watched ? "green" : "red" }}
+          >
+            {movie.watched ? "Watched" : "To Watch"}
+          </button>
+          <button
+            onClick={() => dispatch({ type: "DELETE_MOVIE", payload: index })}
+          >
+            Delete
+          </button>
+        </div>
       </div>
       {showDetails && (
         <div>

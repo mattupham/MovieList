@@ -4,11 +4,6 @@ import Movie from "src/components/Movie/Movie";
 
 export default function MovieList() {
   const movies = useMovieState();
-  const dispatch = useMovieDispatch();
-
-  const toggleWatched = (index: number) => {
-    dispatch({ type: "TOGGLE_WATCHED", payload: index });
-  };
 
   return (
     <ul>
@@ -18,12 +13,7 @@ export default function MovieList() {
         // )
         // .filter(movie => movie.watched === watchedFilter)
         .map((movie: IMovie, index: number) => (
-          <Movie
-            key={index}
-            index={index}
-            movie={movie}
-            handleClick={(index: number) => toggleWatched(index)}
-          />
+          <Movie key={index} index={index} movie={movie} />
         ))}
     </ul>
   );

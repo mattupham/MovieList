@@ -28,16 +28,25 @@ const toggleWatched = (movies: State, index: number) => {
   return newMovies;
 };
 
+const deleteMovie = (movies: State, index: number) => {
+  const newMovies = [...movies];
+  newMovies.splice(index, 1);
+  return newMovies;
+};
+
 export function movieReducer(state: State, action: Action) {
   switch (action.type) {
     case "ADD_MOVIE": {
       return [...state, action.payload];
     }
+    case "DELETE_MOVIE": {
+      return deleteMovie(state, action.payload);
+    }
     case "TOGGLE_WATCHED": {
       return toggleWatched(state, action.payload);
     }
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      throw new Error(`Unhandled action type`);
     }
   }
 }
@@ -45,7 +54,7 @@ export function movieReducer(state: State, action: Action) {
 function MovieProvider({ children }: MovieProviderProps) {
   const [state, dispatch] = React.useReducer(movieReducer, [
     {
-      title: "Mean Girls",
+      title: "Batman",
       watched: false,
       year: 1995,
       runTime: 107,
