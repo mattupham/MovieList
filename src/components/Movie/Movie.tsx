@@ -1,6 +1,6 @@
-import React, { MouseEvent, useState } from 'react';
-import { IMovie } from 'src/App';
-import styles from 'src/components/Movie/Movie.module.scss';
+import React, { MouseEvent, useState } from "react";
+import { IMovie } from "src/movie-context";
+import styles from "src/components/Movie/Movie.module.scss";
 
 interface IProps {
   movie: IMovie;
@@ -12,14 +12,18 @@ const Movie = ({ movie, index, handleClick }: IProps) => {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <li onClick={e => setShowDetails(!showDetails)} className={styles.movieItem} key={index}>
+    <li
+      onClick={e => setShowDetails(!showDetails)}
+      className={styles.movieItem}
+      key={index}
+    >
       <div className={styles.titleContainer}>
         <div>{movie.title}</div>
         <button
           onClick={(e: MouseEvent) => handleClick(index)}
-          style={{ backgroundColor: movie.watched ? 'green' : 'red' }}
+          style={{ backgroundColor: movie.watched ? "green" : "red" }}
         >
-          {movie.watched ? 'Watched' : 'To Watch'}
+          {movie.watched ? "Watched" : "To Watch"}
         </button>
       </div>
       {showDetails && (
