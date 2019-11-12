@@ -1,15 +1,13 @@
 import React, { FormEvent, useState } from "react";
+import { useFilterDispatch } from "src/filter-context";
 
-interface IProps {
-  handleQuerySubmit: (query: string) => void;
-}
-
-const Search = ({ handleQuerySubmit }: IProps) => {
+const Search = () => {
   const [query, setQuery] = useState("");
+  const dispatch = useFilterDispatch();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    handleQuerySubmit(query);
+    dispatch({ type: "SET_SEARCH_QUERY", payload: query });
     setQuery("");
   };
 

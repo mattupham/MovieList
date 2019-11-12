@@ -6,10 +6,13 @@ import {
 } from "src/filter-context";
 import Movie from "src/components/Movie/Movie";
 
-const filterFunc = (movie: IMovie, currentWatchFilter: WatchFilters) => {
-  console.log("MOVIE WATCHED: ", currentWatchFilter === WatchFilters.All);
-  if (currentWatchFilter === WatchFilters.All) return true;
-  return currentWatchFilter === movie.watched;
+const watchFilterFunc = (movie: IMovie, curWatchFilter: WatchFilters) => {
+  if (curWatchFilter === WatchFilters.All) return true;
+  return curWatchFilter === movie.watched;
+};
+
+const searchFilterFunc = (movie: IMovie, curSearchFilter: string) => {
+  return movie.title.toLowerCase().includes(curSearchFilter.toLowerCase());
 };
 
 export default function MovieList() {
@@ -19,8 +22,8 @@ export default function MovieList() {
   return (
     <ul>
       {movies
-        .filter(movie => filterFunc(movie, watchFilter))
-        // .filter(movie => movie.watched === watchFilter)
+        .filter(movie => watchFilterFunc(movie, watchFilter))
+        .filter(movie => searchFilterFunc(movie, searchQuery))
         .map((movie: IMovie, index: number) => (
           <Movie key={index} index={index} movie={movie} />
         ))}

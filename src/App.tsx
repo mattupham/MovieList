@@ -7,8 +7,6 @@ import { MovieProvider } from "src/movie-context";
 import { FilterProvider } from "src/filter-context";
 
 const App: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-
   return (
     <MovieProvider>
       <FilterProvider>
@@ -19,9 +17,7 @@ const App: React.FC = () => {
           </div>
           <div>
             <ToggleWatch />
-            <Search
-              handleQuerySubmit={(query: string) => setSearchQuery(query)}
-            />
+            <Search />
           </div>
           <div>
             <MovieList />
