@@ -1,6 +1,6 @@
-import React, { useReducer, useContext } from "react";
+import React, { useReducer, useContext, useEffect } from "react";
 import { WatchFilter } from "src/contexts/filter-context";
-
+import axios from "axios";
 export interface IMovie {
   title: string;
   watched: WatchFilter;
@@ -11,6 +11,7 @@ export interface IMovie {
 }
 
 type Action =
+  | { type: "ADD_INITIAL_MOVIES"; payload: IMovie[] }
   | { type: "ADD_MOVIE"; payload: IMovie }
   | { type: "DELETE_MOVIE"; payload: number }
   | { type: "TOGGLE_WATCHED"; payload: number };
@@ -40,6 +41,9 @@ const deleteMovie = (movies: State, index: number) => {
 
 export function movieReducer(state: State, action: Action) {
   switch (action.type) {
+    case "ADD_INITIAL_MOVIES": {
+      return action.payload;
+    }
     case "ADD_MOVIE": {
       return [...state, action.payload];
     }
@@ -56,48 +60,16 @@ export function movieReducer(state: State, action: Action) {
 }
 
 function MovieProvider({ children }: MovieProviderProps) {
-  const [state, dispatch] = useReducer(movieReducer, [
-    {
-      title: "Batman",
-      watched: WatchFilter.ToWatch,
-      year: 1995,
-      runTime: 107,
-      metascore: 46,
-      imdbRating: 6.2
-    },
-    {
-      title: "Hackers",
-      watched: WatchFilter.ToWatch,
-      year: 1990,
-      runTime: 62,
-      metascore: 33,
-      imdbRating: 7.8
-    },
-    {
-      title: "The Grey",
-      watched: WatchFilter.ToWatch,
-      year: 1897,
-      runTime: 23,
-      metascore: 45,
-      imdbRating: 2.5
-    },
-    {
-      title: "Sunshine",
-      watched: WatchFilter.ToWatch,
-      year: 1122,
-      runTime: 334,
-      metascore: 64,
-      imdbRating: 5.4
-    },
-    {
-      title: "Ex Machina",
-      watched: WatchFilter.ToWatch,
-      year: 2030,
-      runTime: 123,
-      metascore: 125,
-      imdbRating: 5.8
+  const [state, dispatch] = useReducer(movieReducer, []);
+
+  useEffect(() => {
+    async function loadMovies() {
+      const { data: movies } = await axios.get("http://localhost:8080/movies");
+      dispatch({ type: "ADD_INITIAL_MOVIES", payload: movies });
     }
-  ]);
+    loadMovies();
+  }, []);
+
   return (
     <MovieStateContext.Provider value={state}>
       <MovieDispatchContext.Provider value={dispatch}>
