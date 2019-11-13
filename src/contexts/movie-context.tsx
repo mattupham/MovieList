@@ -1,7 +1,6 @@
 import React, { useReducer, useContext, useEffect } from "react";
 import { WatchFilter } from "src/contexts/filter-context";
 import axios from "axios";
-import { getMovies, parseMovies } from "src/lib/movieAPI";
 export interface IMovie {
   title: string;
   watched: WatchFilter;
@@ -65,11 +64,8 @@ function MovieProvider({ children }: MovieProviderProps) {
 
   useEffect(() => {
     async function loadMovies() {
-      // const { data: movies } = await axios.get("http://localhost:8080/movies");
-      const {
-        data: { results: movies }
-      } = await getMovies();
-      dispatch({ type: "ADD_INITIAL_MOVIES", payload: parseMovies(movies) });
+      const { data: movies } = await axios.get("http://localhost:8080/load");
+      dispatch({ type: "ADD_INITIAL_MOVIES", payload: movies });
     }
     loadMovies();
   }, []);
